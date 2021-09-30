@@ -3,7 +3,7 @@ const storeTodos = (storeKey, todos) => {
   
   Object.assign(todos, {done: false});
   Object.assign(todos, {id: Date.now()});
-  
+
   if(todosInStore === null){
     localStorage.setItem(storeKey, JSON.stringify([todos]))
   } else{
@@ -62,7 +62,7 @@ const generateTodos = (todos) => {
     });
     
 
-    todosElem.innerHTML = ` <li class="todos ${todo.done ? 'done' : ''}">
+    todosElem.innerHTML = ` <span class="todos ${todo.done ? 'done' : ''}">
         <div class="content">
           <h4 class="title">title: ${todo.title}</h4>
           <p class="details">details: ${todo.details}</p>
@@ -72,7 +72,7 @@ const generateTodos = (todos) => {
           <button  onclick="editTodos('todos',${todo.id})">edit</button>
           <button onclick="doneTodos('todos',${todo.id})">done</button>
         </div>
-      </li>`
+      </span>`
         
 
     todosWrapper.appendChild(todosElem);
@@ -160,6 +160,14 @@ const doneTodos = (storeKey ,id) => {
   todosList[sameIdIndex].done = true;
   generateTodos(todosList)
   localStorage.setItem(storeKey, JSON.stringify(todosList))
+}
+
+const clearDoneTodos = (storeKey) => {
+  const todosInStore = localStorage.getItem(storeKey)  
+  const todosList = JSON.parse(todosInStore);   
+  const notDoneYet = todosList.filter(todo => !todo.done);  
+    generateTodos(notDoneYet)
+  localStorage.setItem(storeKey, JSON.stringify(notDoneYet))
 }
 
 

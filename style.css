@@ -1,30 +1,54 @@
+:root {
+  --done: #fef1e6;
+  --normal: #f9d5a7;
+  font-family: 'Prompt', sans-serif;
+  font-size: 16px;
+}
+
 body {
+  background-color: #90aacb;
+}
+
+.container {
+  width: 100%;
+  max-width: 1024px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
+
 .todos-wrapper {
   width: 100%;
+  max-width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: unset;
 }
 
 li {
   list-style: none;
   width: 100%;
-  max-width: 450px;
 }
 .todos {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px #323232 solid;
-  padding: 1rem;
+  border: none #323232 solid;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
   margin-bottom: 1rem;
+  background-color: var(--normal);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.todos:hover {
+  background-color: #f8cf98;
+  transform: translateX(-20px);
 }
 
 .content {
@@ -59,6 +83,21 @@ li {
 }
 
 .done {
+  background-color: var(--done);
   opacity: 0.5;
   pointer-events: none;
+}
+
+.done > div :is(p, h4) {
+  text-decoration: line-through;
+}
+header {
+  width: 100%;
+  max-width: 500px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #323232;
+  text-align: left;
 }
